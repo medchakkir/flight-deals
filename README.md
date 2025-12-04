@@ -24,7 +24,7 @@ A Python application that helps you track and find the best flight deals to your
 1. Clone this repository:
 
 ```bash
-git clone https://github.com/momed-ali01/flight-deals.git
+git clone https://github.com/<username>/flight-deals.git
 cd flight-deals
 ```
 
