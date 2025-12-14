@@ -1,26 +1,24 @@
 #This file will need to use the DataManager,FlightSearch, FlightData, NotificationManager classes to achieve the program requirements.
 
-# Imports
+import os
+import smtplib
+import requests
+from pprint import pprint
+from dotenv import load_dotenv
 from flight_search import FlightSearch
 from data_manager import DataManager
-from pprint import pprint
-import requests
-import twilio
 
-AMADEUS_API_KEY = 'JhAXlCXz9IGS5wk96gpQEo7MXBzk2N15'
-AMADEUS_API_SECRET = '39WGiTWcON0SiDaf'
-AMADEUS_ENDPOINT = 'https://test.api.amadeus.com/v1/security/oauth2/token'
+# Load environment variables
+load_dotenv()
 
-amadeus_params = {
-    "client_id": AMADEUS_API_KEY,
-    "client_secret": AMADEUS_API_SECRET,
-}
+# Get environment variables
+AMADEUS_API_KEY = os.getenv('AMADEUS_API_KEY')
+AMADEUS_API_SECRET = os.getenv('AMADEUS_API_SECRET')
+SHEET_ENDPOINT = os.getenv('SHEET_ENDPOINT')
 
-amadeus_header = {
-    'Content_Type': 'application/x-www-form-urlencoded'
-}
-
-SHEET_ENDPOINT = 'https://api.sheety.co/3d6c2f0d215852511aa284b0b7e45fa4/flightDeals/prices'
+# Validate environment variables
+if not AMADEUS_API_KEY or not AMADEUS_API_SECRET or not SHEET_ENDPOINT:
+    raise ValueError("Missing required environment variables")
 
 
 response = requests.get(SHEET_ENDPOINT)
